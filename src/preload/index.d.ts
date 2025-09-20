@@ -1,8 +1,11 @@
-import { ElectronAPI } from '@electron-toolkit/preload'
+import { ElectronAPI } from "@electron-toolkit/preload"
 
 declare global {
   interface Window {
     electron: ElectronAPI
-    api: unknown
+    api: {
+      openFile: () => Promise<string | null>,
+      readFile: (filePath: string) => Promise<string | null>
+    }
   }
 }

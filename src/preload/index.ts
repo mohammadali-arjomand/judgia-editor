@@ -1,16 +1,20 @@
-import { contextBridge } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
+import { contextBridge, ipcRenderer } from "electron"
+import { electronAPI } from "@electron-toolkit/preload"
+import { readFile } from "fs/promises"
 
 // Custom APIs for renderer
-const api = {}
+const api = {
+  openFile: () => ipcRenderer.invoke("dialog:openFile"),
+  readFile: async (filePath: string) => readFile(filePath, "utf-8")
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
 // just add to the DOM global.
 if (process.contextIsolated) {
   try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
-    contextBridge.exposeInMainWorld('api', api)
+    contextBridge.exposeInMainWorld("electron", electronAPI)
+    contextBridge.exposeInMainWorld("api", api)
   } catch (error) {
     console.error(error)
   }

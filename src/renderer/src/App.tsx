@@ -14,7 +14,13 @@ function App(): React.JSX.Element {
   }
 
   function openFileAction(): void {
-    return
+    const handleOpenFile = async (): Promise<void> => {
+      const filePath = await window.api.openFile()
+      if (!filePath) return
+      const content = await window.api.readFile(filePath)
+      aceRef.current?.editor.setValue(content || "", -1)
+    }
+    handleOpenFile()
   }
 
   function saveFileAction(): void {
