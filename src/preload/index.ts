@@ -1,11 +1,13 @@
 import { contextBridge, ipcRenderer } from "electron"
 import { electronAPI } from "@electron-toolkit/preload"
-import { readFile } from "fs/promises"
+import { writeFile, readFile } from "fs/promises"
 
 // Custom APIs for renderer
 const api = {
   openFile: () => ipcRenderer.invoke("dialog:openFile"),
-  readFile: async (filePath: string) => readFile(filePath, "utf-8")
+  saveFile: async () => ipcRenderer.invoke("dialog:saveFile"),
+  readFile: async (filePath: string) => readFile(filePath, "utf-8"),
+  writeFile: async (filePath: string, content: string) => writeFile(filePath, content, "utf-8"),
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

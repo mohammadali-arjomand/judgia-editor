@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain, dialog } from "electron"
 import { join } from "path"
 import { electronApp, optimizer, is } from "@electron-toolkit/utils"
 import icon from "../../resources/icon.png?asset"
+import os from 'os'
 
 let mainWindow
 function createWindow(): void {
@@ -64,6 +65,15 @@ app.whenReady().then(() => {
     })
     if (canceled) return null
     return filePaths[0]
+  })
+  ipcMain.handle("dialog:saveFile", async () => {
+    const { canceled, filePath } = await dialog.showSaveDialog(mainWindow, {
+      properties: ["showOverwriteConfirmation"],
+      filters: [{ name: "All Files", extensions: ["*"] }],
+      defaultPath: os.homedir() + "/untitled.cpp"
+    })
+    if (canceled) return
+    return filePath
   })
 
   createWindow()
