@@ -14,3 +14,6 @@ npm run build:linux
 ## TODO List
 - Adding execute button in toolbar and writing the logic
 
+# License
+Copyright (c) 2025 MohammadAli Arjomand.
+Licensed under [GPL-3.0 license](LICENSE)
