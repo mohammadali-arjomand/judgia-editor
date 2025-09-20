@@ -5,10 +5,29 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background-color: #242623;
 }
 
 .tools-bar {
   height: 5%;
+  display: flex;
+}
+
+.tools-bar button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  width: 80px;
+  cursor: pointer;
+  margin: 6px 3px;
+  border-radius: 4px;
+}
+
+.tools-bar button:hover {
+  background-color: #ffffff55;
+  transition: .5s;
+
 }
 
 .workspace {
@@ -41,4 +60,6 @@
   border: none;
   outline: none;
   font-size: 16px;
+  background-color: transparent;
+  color: white;
 }
