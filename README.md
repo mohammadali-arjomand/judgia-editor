@@ -1,5 +1,8 @@
 # Judgia Editor
 An editor specially for competitive programming with C++
+
+![judgia editor screenshot](resources/screenshot.png)
+
 ## Development
 ```bash
 npm install
@@ -10,9 +13,6 @@ npm run dev
 ```bash
 npm run build:linux
 ```
-
-## TODO List
-- Adding execute button in toolbar and writing the logic
 
 # License
 Copyright (c) 2025 MohammadAli Arjomand.
