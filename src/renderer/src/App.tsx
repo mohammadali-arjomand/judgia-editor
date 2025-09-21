@@ -7,6 +7,8 @@ function App(): React.JSX.Element {
   const template =
     "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvoid solve() {\n\n\t// code here\n\n\treturn;\n}\n\nint main() {\n\tint t = 1;\n\t//cin >> t;\n\twhile (t--) solve();\n\treturn 0;\n}"
   const [code, setCode] = useState<string>(template)
+  const [testcase, setTestcase] = useState<string>("")
+  const [output, setOutput] = useState<string>("")
   const aceRef = useRef<AceEditor>(null)
 
   useEffect(() => {
@@ -120,12 +122,17 @@ function App(): React.JSX.Element {
         </div>
         <div className="left-sidebar">
           <div className="sidebar-top">
-            <textarea id="testcase-text" placeholder="Write the testcase here..."></textarea>
+            <textarea
+              value={testcase}
+              onChange={(e) => setTestcase(e.target.value)}
+              placeholder="Write the testcase here..."
+            ></textarea>
           </div>
           <div className="sidebar-bottom">
             <textarea
-              id="output-text"
               disabled
+              value={output}
+              onChange={(e) => setOutput(e.target.value)}
               placeholder="Output will be shown here..."
             ></textarea>
           </div>
