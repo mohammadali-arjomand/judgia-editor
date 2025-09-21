@@ -87,6 +87,40 @@ function App(): React.JSX.Element {
     aceRef.current?.editor.setValue(template)
   }
 
+  function executeAction(): void {
+    const compileFile = (): void => {
+      setOutput("Compiling...")
+      const t1 = Date.now()
+      window.api
+        .execute(localStorage.filePath as string, testcase)
+        .then((value) => {
+          const t2 = Date.now()
+          setOutput(`[OUTPUT UPDATED IN ${(t2 - t1) / 1000}s]\n` + value.stdout)
+        })
+        .catch((e) => setOutput("[ERROR]\n" + e))
+    }
+
+    if (localStorage.filePath !== undefined) {
+      if (localStorage.filePath !== undefined) {
+        window.api.writeFile(localStorage.filePath, code).then(compileFile)
+        localStorage.removeItem("hasChanged")
+        document.title = document.title.replaceAll("*", "")
+      } else {
+        const handleSaveFile = async (): Promise<void> => {
+          const filePath = await window.api.saveFile()
+          if (!filePath) return
+          window.api.writeFile(filePath, code).then(compileFile)
+          localStorage.removeItem("hasChanged")
+          localStorage.setItem("filePath", filePath)
+          document.title += ` ~ ${String(filePath).split("/").at(-1)}`
+          document.title = document.title.replaceAll("*", "")
+        }
+        handleSaveFile()
+      }
+    }
+    setOutput("Loading...")
+  }
+
   return (
     <div className="container">
       <div className="tools-bar">
@@ -95,6 +129,7 @@ function App(): React.JSX.Element {
         <button onClick={saveFileAction}>Save</button>
         <button onClick={saveAsFileAction}>Save as</button>
         <button onClick={templateAction}>Template</button>
+        <button onClick={executeAction}>Execute</button>
       </div>
       <div className="workspace">
         <div className="editor">

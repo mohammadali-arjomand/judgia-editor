@@ -3124,6 +3124,11 @@ jsonfile@^6.0.1:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
+judgiajslib@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/judgiajslib/-/judgiajslib-1.0.2.tgz#b95bb346250da529569537d56f431156a23bd2d9"
+  integrity sha512-WOcCeGdYVgfp6qc8sFsd/IMd//9N1yAOQn15T/ozj3UOD5BbhQHOBCNoiRnhBEh3wGDngxrSKgyvDVaSQXH1cg==
+
 keyv@^4.0.0, keyv@^4.5.4:
   version "4.5.4"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.5.4.tgz#a879a99e29452f942439f2a405e3af8b31d4de93"
