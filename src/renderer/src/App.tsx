@@ -129,6 +129,14 @@ function App(): React.JSX.Element {
     aceRef.current?.editor.redo()
   }
 
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && (e.key === "S" || e.key === "s" || e.key === "س")) {
+      saveFileAction()
+    } else if (e.key === "F5") {
+      executeAction()
+    }
+  })
+
   return (
     <div className="container">
       <div className="tools-bar">
