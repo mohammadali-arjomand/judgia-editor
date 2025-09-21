@@ -121,6 +121,14 @@ function App(): React.JSX.Element {
     setOutput("Loading...")
   }
 
+  function undoFile(): void {
+    aceRef.current?.editor.undo()
+  }
+
+  function redoFile(): void {
+    aceRef.current?.editor.redo()
+  }
+
   return (
     <div className="container">
       <div className="tools-bar">
@@ -128,6 +136,8 @@ function App(): React.JSX.Element {
         <button onClick={openFileAction}>Open</button>
         <button onClick={saveFileAction}>Save</button>
         <button onClick={saveAsFileAction}>Save as</button>
+        <button onClick={undoFile}>Undo</button>
+        <button onClick={redoFile}>Redo</button>
         <button onClick={templateAction}>Template</button>
         <button onClick={executeAction}>Execute</button>
       </div>
